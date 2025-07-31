@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Media Center</title>
+</head>
+
+<body>
+    <audio controls>
+        <source src="music/AURORA - Animal.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <h1>🎵 Local Music Server</h1>
+    <ul id="music-list"></ul>
+
+    <form action="/upload" enctype="multipart/form-data" method="POST">
+        <input type="file" name="musicFile" accept="audio/*" required>
+        <button type="submit">Upload Music</button>
+    </form>
+
+    <script>
+
+        let mainAudio = document.querySelector("audio");
+
+        fetch("/api/music")
+            .then(res => res.json())
+            .then(files => {
+                const list = document.getElementById("music-list");
+                files.forEach(file => {
+                    const li = document.createElement("li");
+                    const a = document.createElement("a");
+                    mainAudio.src = file.url;
+                    a.textContent = file.name + " ";
+                    a.addEventListener("click", (e) => {
+                        e.preventDefault();
+                        mainAudio.src = file.url;
+                        mainAudio.play();
+                    });
+                    li.appendChild(a);
+                    list.appendChild(li);
+                });
+            });
+    </script>
+</body>
+
+</html>
