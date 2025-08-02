@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Media Center</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -15,8 +16,23 @@
     <h1>🎵 Local Music Server</h1>
     <ul id="music-list"></ul>
 
-    <form action="/upload" enctype="multipart/form-data" method="POST">
-        <input type="file" name="musicFile" accept="audio/*" required>
+    <form class="add_track_form" action="/upload" enctype="multipart/form-data" method="POST">
+        <h2>Add Track</h2>
+        <div>
+            <label for="musicName">Title</label>
+            <input type="text" name="trackName" placeholder="Music Name" required>
+        </div>
+        <div>
+            <label for="musicName">Artist</label>
+            <input type="text" name="trackArtist" placeholder="Artist Name">
+        </div>
+        <div>
+            <label for="musicName">Album</label>
+            <input type="text" name="trackAlbum" placeholder="Album Name">
+        </div>
+        <div>
+            <input type="file" name="musicFile" accept="audio/*" required>
+        </div>
         <button type="submit">Upload Music</button>
     </form>
 
